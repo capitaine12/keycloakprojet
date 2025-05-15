@@ -1,0 +1,41 @@
+<?php return array(
+    'root' => array(
+        'name' => '__root__',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '149496de7f9fcf09d9c19cedcca398ef70cc2b8d',
+        'type' => 'library',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'dev' => true,
+    ),
+    'versions' => array(
+        '__root__' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '149496de7f9fcf09d9c19cedcca398ef70cc2b8d',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'firebase/php-jwt' => array(
+            'pretty_version' => 'v6.11.1',
+            'version' => '6.11.1.0',
+            'reference' => 'd1e91ecf8c598d073d0995afa8cd5c75c6e19e66',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../firebase/php-jwt',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'robsontenorio/laravel-keycloak-guard' => array(
+            'pretty_version' => '1.6.3',
+            'version' => '1.6.3.0',
+            'reference' => '6a2f40813a80d7343b24979e0797562d8c2618d7',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../robsontenorio/laravel-keycloak-guard',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+    ),
+);
