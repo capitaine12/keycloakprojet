@@ -1,4 +1,4 @@
-#commande a exucter pour lee clonage pour le depos  github
+#commande a exucter pour le clonage pour le depos  github
 
 git clone git@github.com:capitaine12/keycloakprojet.git
     git checkout -b votre-branche
@@ -10,3 +10,30 @@ liste des branches
   biblio --> pour mois
   classe_note --> hawa
   click-eat --> diarisso
+
+
+  backend == > docker file
+
+  FROM php:8.3-apache
+
+# Installe dépendances PHP
+RUN docker-php-ext-install pdo pdo_mysql
+
+# Copie ton code Laravel
+COPY . /var/www/html
+
+# Active mod_rewrite (important pour Laravel routes)
+RUN a2enmod rewrite
+
+# Droits
+RUN chown -R www-data:www-data /var/www/html
+
+/frontend/Dockerfile
+
+FROM node:18 AS build
+WORKDIR /app
+COPY . .
+RUN npm install && npm run build --prod
+
+FROM nginx:alpine
+COPY --from=build /app/dist/newapp /usr/share/nginx/html
