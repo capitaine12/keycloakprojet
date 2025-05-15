@@ -6,8 +6,8 @@ export function initializeKeycloak(keycloak: KeycloakService) {
     keycloak.init({
       config: {
         url: 'http://localhost:8080', // Adresse de Keycloak
-        realm: 'saturne',             // Nom de ton realm
-        clientId: 'angular-frontend', // Nom du client dans Keycloak
+        realm: 'saturne',             // Nom de du royaume
+        clientId: 'cxdocs-front', // Nom du client dans Keycloak
       },
       initOptions: {
         onLoad: 'login-required',
