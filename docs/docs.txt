@@ -1,0 +1,12 @@
+#commande a exucter pour lee clonage pour le depos  github
+
+git clone git@github.com:capitaine12/keycloakprojet.git
+    git checkout -b votre-branche
+    git add .
+    git commit -m "Message"
+    git push origin votre-branche
+    
+liste des branches
+  biblio --> pour mois
+  classe_note --> hawa
+  click-eat --> diarisso
