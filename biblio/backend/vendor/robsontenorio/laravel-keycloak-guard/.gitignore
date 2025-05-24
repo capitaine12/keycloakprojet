@@ -1,5 +1,0 @@
-vendor
-.php_cs.cache
-.php-cs-fixer.cache
-.coverage/
-.phpunit.result.cache

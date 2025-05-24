@@ -42,18 +42,6 @@ return [
         ],
     ],
 
-    'guards' => [
-    'web' => [
-        'driver' => 'session',
-        'provider' => 'users',
-    ],
-    'api' => [
-        'driver' => 'keycloak',
-        'provider' => 'users',
-    ],
-],
-
-
     /*
     |--------------------------------------------------------------------------
     | User Providers
