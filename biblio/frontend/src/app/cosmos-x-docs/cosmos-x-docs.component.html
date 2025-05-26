@@ -1,0 +1,24 @@
+<!-- cosmos-x-docs.component.html -->
+<div class="docs-container">
+    <header class="portail-header">
+    <img class="user-avatar" src="/assets/img/avatar.png" alt="avatar">
+    <span class="user-name">Nafi Kamara</span>
+    <!-- <button class="logout-button" (click)="keycloak.logout({ redirectUri: window.location.origin })">
+      Déconnexion</button> -->
+      <!-- <button (click)="keycloakService.logout(origin)">Déconnexion</button> -->
+  </header>
+  <h1 class="title">📚 Cosmos X Docs</h1>
+  <p class="subtitle">Accédez à vos cours numériques en toute sécurité.</p>
+
+  <div *ngIf="cours.length === 0" class="loading">
+    Chargement des cours...
+  </div>
+
+  <div class="cours-grid" *ngIf="cours.length > 0">
+    <div class="cours-card" *ngFor="let c of cours">
+      <h3>{{ c.titre }}</h3>
+      <p>{{ c.description }}</p>
+      <a [href]="c.url" target="_blank">📥 Télécharger</a>
+    </div>
+  </div>
+</div>

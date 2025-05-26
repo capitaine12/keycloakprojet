@@ -1,24 +1,22 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+
 import { initializeKeycloak } from './keycloak-init';
-import { KeycloakService } from 'keycloak-angular';
-
-
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule
-  ],
-
+  declarations: [AppComponent],
+  imports: [BrowserModule, KeycloakAngularModule],
   providers: [
-  {
-    provide: APP_INITIALIZER,
-    useFactory: initializeKeycloak,
-    multi: true,
-    deps: [KeycloakService]
-  }
-]
-
+    KeycloakService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      multi: true,
+      deps: [KeycloakService],
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
