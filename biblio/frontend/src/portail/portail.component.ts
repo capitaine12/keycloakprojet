@@ -20,10 +20,11 @@ interface App {
 export class PortailComponent {
   public apps: App[] = [];
   public origin = window.location.origin;
+  keycloak: any;
 
   constructor(private router: Router, public keycloakService: KeycloakService) {
     this.apps = [
-      { path: '/app1', image: 'assets/img/app1.png', name: 'App 1', color: 'blue', icon: '⭐' },
+      { path: '/app1', image: 'assets/imgs/app1.png', name: 'App 1', color: 'blue', icon: '⭐' },
       { path: '/app2', image: 'assets/img/app2.png', name: 'App 2', color: 'green', icon: '🚀' },
     ];
   }
@@ -37,4 +38,9 @@ export class PortailComponent {
       });
     }
   }
+  logout() {
+  this.keycloak.logout({ redirectUri: typeof window !== 'undefined' ? window.location.origin : '/' });
+
+}
+
 }

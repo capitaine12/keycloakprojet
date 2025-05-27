@@ -13,7 +13,7 @@
   <div *ngIf="cours.length === 0" class="loading">
     Chargement des cours...
   </div>
-
+<!-- card -->
   <div class="cours-grid" *ngIf="cours.length > 0">
     <div class="cours-card" *ngFor="let c of cours">
       <h3>{{ c.titre }}</h3>
