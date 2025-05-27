@@ -1,0 +1,31 @@
+.mod-head{
+    background-color: white     
+}
+.logo-text {
+  font-family: 'Raleway', sans-serif; /* ou Montserrat, Raleway, etc. */
+  font-size: 28px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  position: relative;
+  left:20em;
+}
+
+.logo-accent {
+  color: #0f7b2c; /* accent jaune pour le "&" */
+  font-weight: 800;
+}
+.fleche {
+  font-size: 30px;
+  opacity: 128;
+  color: #204634;
+  text-decoration: none;
+  font-weight: bolder;
+  position: relative;
+  left:3em;
+}
+.deconnect{
+    position: relative;
+    left: 5em;
+}
