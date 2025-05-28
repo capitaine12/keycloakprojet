@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+
 import Register from '@/views/Register.vue'
 import Acceuil from '@/views/Acceuil.vue'
 import Dashboard from '@/views/Dashboard.vue'
@@ -19,8 +20,9 @@ const routes = [
   { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound }
 ]
 
-createRouter({
+const router = createRouter({
   history: createWebHistory(),
   routes
-});
-export default routerKey;
+})
+
+export default router
