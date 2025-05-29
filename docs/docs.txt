@@ -37,3 +37,10 @@ RUN npm install && npm run build --prod
 
 FROM nginx:alpine
 COPY --from=build /app/dist/newapp /usr/share/nginx/html
+
+
+Afficher d’autres informations du token (email, rôle, etc.) ?
+
+Générer une page de profil utilisateur dédiée dans Cosmos X Docs ?
+
+Ou tester l’appel à l’API Laravel sécurisé avec le token JWT ?
