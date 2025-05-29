@@ -1,17 +1,23 @@
 <div class="portail-container">
   <header class="portail-header">
-    <img class="user-avatar" src="assets/img/avatar.png" alt="avatar">
-    <span class="user-name">Nafi Kamara</span>
-    <!-- <button class="logout-button" (click)="keycloak.logout({ redirectUri: window.location.origin })">
-      Déconnexion</button> -->
-      <button (click)="keycloakService.logout(origin)">Déconnexion</button>
+    <div class="user-items">
+      <img class="user-avatar" src="assets/imgs/g1.png" alt="avatar">
+      <span class="user-name">{{ username }}</span>
+    </div>
+    <button class="logout-button" (click)="logout()">Déconnexion</button>
   </header>
+
+  <h1 class="portail-title">
+    Bienvenue sur le portail <span style="color: rgb(218, 217, 217);">COSMOS X</span>
+  </h1>
 
   <div class="app-grid">
     <div *ngFor="let app of apps" class="app-card" (click)="goToApp(app.path)">
-      <img [src]="app.image" [alt]="app.name" class="app-logo" />
+      <div class="card-logo">
+        <img [src]="app.image" [alt]="app.name" class="card-logo-image" />
+      </div>
       <div class="app-footer" [style.color]="app.color">
-        <span class="app-icon">{{ app.icon }}</span>
+        <img [src]="app.icon" [alt]="app.name" class="app-icon" />
         <span class="app-name">{{ app.name }}</span>
       </div>
     </div>

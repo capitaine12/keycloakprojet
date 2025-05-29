@@ -14,10 +14,11 @@ export const routes: Routes = [
   {
     path: 'cosmos',
     loadComponent: () =>
-      import('./cosmos-x-docs/cosmos-x-docs.component').then(m => m.CosmosXDocsComponent),
+    import('./cosmos-x-docs/cosmos-x-docs.component').then(m => m.CosmosXDocsComponent),
     canActivate: [KeycloakAuthGuard],
     data: { roles: [] }
-  }, /*
+  }, 
+  /*
   {
     path: 'click-eat',
     loadComponent: () =>

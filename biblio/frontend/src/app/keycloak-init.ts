@@ -38,6 +38,7 @@ export function initializeKeycloak(keycloakService: KeycloakService): () => void
     },
     initOptions: {
       onLoad: 'login-required',
+      responseMode: 'query',
       checkLoginIframe: false,
     },
   }).then(() => {

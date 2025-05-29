@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
 import { CommonModule } from '@angular/common';
@@ -14,19 +14,46 @@ interface App {
 @Component({
   selector: 'app-portail',
   templateUrl: './portail.component.html',
-  standalone: true, 
+  styleUrls: ['./portail.component.css'],
+  standalone: true,
   imports: [CommonModule],
 })
-export class PortailComponent {
+export class PortailComponent implements OnInit {
   public apps: App[] = [];
   public origin = window.location.origin;
-  keycloak: any;
+  username: string = 'Utilisateur';
 
   constructor(private router: Router, public keycloakService: KeycloakService) {
     this.apps = [
-      { path: '/app1', image: 'assets/imgs/app1.png', name: 'App 1', color: 'blue', icon: '⭐' },
-      { path: '/app2', image: 'assets/img/app2.png', name: 'App 2', color: 'green', icon: '🚀' },
+      {
+        path: 'cosmos',
+        image: 'assets/imgs/g1.png',
+        name: 'Cosmos X DOCS',
+        color: 'blue',
+        icon: 'assets/imgs/cx.png'
+      },
+      {
+        path: 'clickeat',
+        image: 'assets/imgs/g1.png',
+        name: 'Click & Eat',
+        color: 'green',
+        icon: 'assets/imgs/School Cafeteria.png'
+      },
+      {
+        path: 'classnote',
+        image: 'assets/imgs/g2.png',
+        name: 'Classe Note',
+        color: 'green',
+        icon: 'assets/imgs/School.png'
+      }
     ];
+  }
+
+  ngOnInit() {
+    const token = this.keycloakService.getKeycloakInstance().tokenParsed;
+    if (token) {
+      this.username = token['preferred_username'] || token['name'] || 'Utilisateur';
+    }
   }
 
   goToApp(appRoute: string) {
@@ -38,9 +65,11 @@ export class PortailComponent {
       });
     }
   }
+
   logout() {
-  this.keycloak.logout({ redirectUri: typeof window !== 'undefined' ? window.location.origin : '/' });
-
-}
-
+    const logoutUrl = this.keycloakService.getKeycloakInstance().createLogoutUrl({
+      redirectUri: window.location.origin
+    });
+    window.location.href = logoutUrl;
+  }
 }

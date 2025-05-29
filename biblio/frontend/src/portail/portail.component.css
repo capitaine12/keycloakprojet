@@ -1,82 +1,183 @@
 /* portail.component.css */
+*,
+*::after,
+*::before
+{
+
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+
+}
+
+body{
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* Conteneur principal avec fond */
 .portail-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem;
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+ /*  padding: 4rem 1.5rem; */
   min-height: 100vh;
+  /* background: linear-gradient(to bottom right, #dbeeff, #f7faff); */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Barre supérieure : avatar, nom et bouton à droite */
+/* Conteneur du header */
 .portail-header {
-  width: 100%;
+ width: 100%;
+  /* max-width: 1200px; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.5rem;
+    margin-bottom: 2rem;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 50px;
+    position: sticky;
+    top: 0;
+}
+
+/* Bloc utilisateur : avatar + nom */
+.user-items {
   display: flex;
-  justify-content: flex-end;
   align-items: center;
-  margin-bottom: 2rem;
 }
 
 .user-avatar {
-  width: 40px;
+  width: 25%;
   height: 40px;
   border-radius: 50%;
-  margin-right: 0.5rem;
+  object-fit: cover;
+  margin-right: 0.8rem;
+  border: 2px solid #003366;
 }
 
 .user-name {
-  font-weight: bold;
-  margin-right: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #003366;
 }
 
+/* Bouton Déconnexion stylisé */
 .logout-button {
-  background-color: #d9534f;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
+  background: none;
+  border: 2px solid #003366;
+  border-radius: 25px;
+  padding: 0.4rem 1.2rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #003366;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
+
+.logout-button:hover {
+  background-color: #003366;
+  color: white;
+}
+
+
 
 .app-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2.5rem;
   width: 100%;
-  max-width: 1000px;
+  max-width: 1100px;
+  justify-items: center;
 }
 
+/* Style des cartes d'application */
 .app-card {
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
+   display: flex;
+  justify-content: space-between;
+  
+  background-color: #ffffff;
+  border-radius: 5px;
+  width: 220px;
+  height: 370px;
+  padding: 0.5rem 0rem;
+ 
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 1.05);
   cursor: pointer;
-  transition: transform 0.2s ease;
 }
 
 .app-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
 }
 
-.app-logo {
+/* Cercle contenant le logo */
+.card-logo {
   width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  height: 280px;
+  border: 1px solid chocolate;
+   background: white; 
+  margin-bottom: 1.2rem;
+}
+
+.card-logo-image {
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
+}
+
+/* Emoji (icône) en haut à droite — comme sur ton image */
+/* .app-icon {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 1.3rem;
+} */
+
+/* Nom de l'application centré */
+.app-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #003366;
+  text-align: center;
 }
 
 .app-footer {
-  padding: 1rem;
+  width: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  font-size: 1rem;
-  font-weight: bold;
+  justify-content: space-evenly;
+  /* gap: 5px;
+  padding: 10px; */
 }
 
+/* Icône emoji */
 .app-icon {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
+  border: solid 1px black;
+  height: 50%;
+  width: 30%;
+
+}
+
+/* Nom d'application 
+.app-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #003366;
+}
+*//* Titre principal */
+.portail-title {
+  font-size: 2.4rem;
+  font-weight: bold;
+  color: #003366;
+  text-align: center;
+  margin-bottom: 2.5rem;
 }
