@@ -1,25 +1,165 @@
-<!-- cosmos-x-docs.component.html -->
-<div class="docs-container">
-    <header class="portail-header">
-    <img class="user-avatar" src="/assets/img/avatar.png" alt="avatar">
-    <span class="user-name">{{ username }}</span>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="cosmos-x-docs.component.css"/>
+</head>
+<body>
 
-    <!-- <button class="logout-button" (click)="keycloak.logout({ redirectUri: window.location.origin })">
-      Déconnexion</button> -->
-      <!-- <button (click)="keycloakService.logout(origin)">Déconnexion</button> -->
+
+<div class="cosmos-container">
+  <!-- Header Navigation -->
+  <header class="header">
+    <div class="nav-container">
+      <div class="logo-section">
+        <a href="#" class="back-button">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 12H5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 19L5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <div class="logo">
+          <span class="logo-text">Cosmos X Docs</span>
+        </div>
+      </div>
+
+      <div class="user-section">
+        <div class="user-profile" (click)="toggleProfileMenu()">
+          <div class="avatar">{{ username.charAt(0).toUpperCase() }}</div>
+          <span class="username">{{ username }}</span>
+          <div class="dropdown-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+        <div class="profile-menu" *ngIf="showProfileMenu">
+          <div class="menu-item">Profil</div>
+          <div class="menu-item">Paramètres</div>
+          <div class="menu-item logout" (click)="logout()">Déconnexion</div>
+        </div>
+        <button class="logout-button" (click)="logout()">Déconnexion</button>
+      </div>
+
+      <button class="mobile-menu-button" (click)="toggleMobileMenu()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 12H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M3 6H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
   </header>
-  <h1 class="title">📚 Cosmos X Docs</h1>
-  <p class="subtitle">Accédez à vos cours numériques en toute sécurité.</p>
 
-  <div *ngIf="cours.length === 0" class="loading">
-    Chargement des cours...
-  </div>
-<!-- card -->
-  <div class="cours-grid" *ngIf="cours.length > 0">
-    <div class="cours-card" *ngFor="let c of cours">
-      <h3>{{ c.titre }}</h3>
-      <p>{{ c.description }}</p>
-      <a [href]="c.url" target="_blank">📥 Télécharger</a>
+  <!-- Search Bar -->
+  <div class="search-container">
+    <div class="search-bar">
+      <input 
+        type="text" 
+        placeholder="Taper votre recherche" 
+        [(ngModel)]="searchTerm"
+        (input)="searchCourses()"
+      >
+      <button class="search-button">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M21 21L16.65 16.65" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
     </div>
   </div>
+
+  <!-- Main Navigation -->
+  <nav class="main-nav">
+    <div class="nav-menu" [class.mobile-active]="showMobileMenu">
+      <a href="#" class="nav-link" [class.active]="activeTab === 'accueil'" (click)="setActiveTab('accueil')">Accueil</a>
+      <div class="nav-dropdown">
+        <a href="#" class="nav-link" [class.active]="activeTab === 'cours'" (click)="setActiveTab('cours')">
+          Cours
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+      <div class="nav-dropdown">
+        <a href="#" class="nav-link" [class.active]="activeTab === 'licence'" (click)="setActiveTab('licence')">
+          Licence
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+      <div class="nav-dropdown">
+        <a href="#" class="nav-link" [class.active]="activeTab === 'master'" (click)="setActiveTab('master')">
+          Master
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+      <a href="#" class="nav-link" [class.active]="activeTab === 'contact'" (click)="setActiveTab('contact')">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">Bienvenue sur votre bibliotheque numerique COSMOS X DOC</h1>
+      <p class="hero-subtitle">La plateforme pour trouver des ressources pédagogiques pour vos études</p>
+      <button class="discover-button">Découvrir</button>
+    </div>
+    <div class="hero-image">
+      <img src="https://images.pexels.com/photos/3769021/pexels-photo-3769021.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Student with books">
+    </div>
+  </section>
+
+  <!-- Courses Section -->
+  <section class="courses-section">
+    <h2 class="section-title">Nos Documents & Oeuvre</h2>
+    <div class="courses-grid">
+      <div class="course-card" *ngFor="let course of filteredCours">
+        <div class="course-image">
+          <img [src]="course.image" [alt]="course.titre">
+        </div>
+        <div class="course-content">
+          <h3 class="course-title">{{ course.titre }}</h3>
+          <p class="course-description">{{ course.description }}</p>
+          <a [href]="course.url" class="course-link" target="_blank">Voir oeuvre</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <div class="logo">Cosmos X Docs</div>
+        <p>© 2025 Cosmos X Docs. Tous droits réservés.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-column">
+          <h4>Navigation</h4>
+          <a href="#">Accueil</a>
+          <a href="#">Cours</a>
+          <a href="#">Licence</a>
+          <a href="#">Master</a>
+          <a href="#">Contact</a>
+        </div>
+        <div class="footer-column">
+          <h4>Support</h4>
+          <a href="#">Aide</a>
+          <a href="#">FAQ</a>
+          <a href="#">Contactez-nous</a>
+        </div>
+        <div class="footer-column">
+          <h4>Légal</h4>
+          <a href="#">Conditions d'utilisation</a>
+          <a href="#">Politique de confidentialité</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 </div>
+</body>
+</html>

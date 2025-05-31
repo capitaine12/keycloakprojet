@@ -1,0 +1,14 @@
+[
+  {
+    "titre": "Programmation Web",
+    "description": "HTML, CSS, JavaScript",
+    "url": "https://exemple.com/cours1.pdf",
+    "image": "assets/imgs/cours1.png"
+  },
+  {
+    "titre": "Base de Données",
+    "description": "Introduction à MySQL",
+    "url": "https://exemple.com/cours2.pdf",
+    "image": "assets/imgs/cours2.png"
+  }
+]

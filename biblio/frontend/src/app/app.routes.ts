@@ -5,19 +5,22 @@ export const routes: Routes = []; */
 import { Routes } from '@angular/router';
 import { PortailComponent } from '../portail/portail.component';
 import { KeycloakAuthGuard } from 'keycloak-angular';
+import { authGuard } from './auth/auth.guard';
 
 export const routes: Routes = [
-  {
-    path: '',
-    component: PortailComponent
-  },
+  
   {
     path: 'cosmos',
     loadComponent: () =>
     import('./cosmos-x-docs/cosmos-x-docs.component').then(m => m.CosmosXDocsComponent),
-    canActivate: [KeycloakAuthGuard],
+    canActivate: [authGuard],
     data: { roles: [] }
   }, 
+  {
+    path: '',
+    loadComponent: () =>
+      import('../portail/portail.component').then(m => m.PortailComponent)
+  },
   /*
   {
     path: 'click-eat',

@@ -23,9 +23,10 @@ body{
   flex-direction: column;
   align-items: center;
  /*  padding: 4rem 1.5rem; */
-  min-height: 100vh;
+  min-height: 98vh;
   /* background: linear-gradient(to bottom right, #dbeeff, #f7faff); */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: center / cover no-repeat url('../assets/imgs/Capture\ d\'écran\ 2025-05-31\ 012821.png');
 }
 
 /* Barre supérieure : avatar, nom et bouton à droite */
@@ -49,21 +50,29 @@ body{
 .user-items {
   display: flex;
   align-items: center;
+  display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 .user-avatar {
-  width: 25%;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 0.8rem;
-  border: 2px solid #003366;
+background-color: #3b82f6;
+    color: white;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
 
 .user-name {
   font-size: 1.1rem;
   font-weight: 600;
   color: #003366;
+
 }
 
 /* Bouton Déconnexion stylisé */
@@ -79,12 +88,39 @@ body{
   transition: all 0.3s ease;
 }
 
+@layer demo {
+  .highlighted-text-shadow {
+    text-shadow:
+      /* regular text-shadow */
+      0 .15ch 15px var(--shadow),
+      /* text-shadow highlight */
+      0 -2px 0 var(--highlight);
+  }
+}
+
+.trl {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  padding: 2rem;
+  gap: 2rem;
+  
+}
+
+
 .logout-button:hover {
   background-color: #003366;
   color: white;
 }
-
-
 
 .app-grid {
   display: grid;
@@ -110,28 +146,49 @@ body{
   align-items: center;
   position: relative;
   transition: box-shadow 0.3s ease, transform 0.2s ease;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 1.05);
+  box-shadow: 0px 1px 4px 0 rgba(0, 0, 0, 1.05);
+  will-change: transform, box-shadow;
   cursor: pointer;
 }
 
 .app-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 0 18px rgba(0, 123, 255, 0.3);
 }
+
+.app-card {
+  animation: fadeInUp 0.6s ease both;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
 /* Cercle contenant le logo */
 .card-logo {
   width: 100%;
   height: 280px;
-  border: 1px solid chocolate;
-   background: white; 
+  background: white; 
   margin-bottom: 1.2rem;
+  display: flex;
+  justify-content: center;
 }
 
 .card-logo-image {
-  width: 60%;
-  height: 60%;
+  width: 100%;
+  /* height: 93%; */
   object-fit: contain;
+  align-items: center;
+  justify-content: center;
+  display: flex;
 }
 
 /* Emoji (icône) en haut à droite — comme sur ton image */
@@ -161,9 +218,8 @@ body{
 
 /* Icône emoji */
 .app-icon {
-  border: solid 1px black;
-  height: 50%;
-  width: 30%;
+  height: 69%;
+  width: 22%;
 
 }
 

@@ -29,8 +29,8 @@ import { ReplaySubject } from 'rxjs';
 
 const keycloakReady$ = new ReplaySubject<boolean>(1);
 
-export function initializeKeycloak(keycloakService: KeycloakService): () => void {
-  keycloakService.init({
+export function initializeKeycloak(keycloak: KeycloakService) {
+  return () => keycloak.init({
     config: {
       url: 'http://localhost:8080',
       realm: 'saturne',
@@ -38,15 +38,11 @@ export function initializeKeycloak(keycloakService: KeycloakService): () => void
     },
     initOptions: {
       onLoad: 'login-required',
-      responseMode: 'query',
       checkLoginIframe: false,
+      useNonce: false
     },
-  }).then(() => {
-    keycloakReady$.next(true);
-    keycloakReady$.complete();
-  }).catch(() => {
-    keycloakReady$.error('Keycloak failed');
+    bearerExcludedUrls: ['/assets']
   });
-
-  return () => {};
 }
+
+
