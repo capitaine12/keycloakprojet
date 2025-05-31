@@ -32,8 +32,8 @@ export const KeycloakProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         // In a real app, these values would come from environment variables
         const keycloakInstance = new Keycloak({
           url: 'http://localhost:8080/auth',
-          realm: 'click-and-eat',
-          clientId: 'click-and-eat-client',
+          realm: 'saturne',
+          clientId: 'click-eat',
         });
 
         const authenticated = await keycloakInstance.init({

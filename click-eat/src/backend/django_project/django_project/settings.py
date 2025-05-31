@@ -127,12 +127,12 @@ REST_FRAMEWORK = {
 }
 
 # Keycloak settings
-OIDC_RP_CLIENT_ID = 'click-and-eat-django'
-OIDC_RP_CLIENT_SECRET = 'your-client-secret'
-OIDC_OP_AUTHORIZATION_ENDPOINT = 'http://localhost:8080/auth/realms/click-and-eat/protocol/openid-connect/auth'
-OIDC_OP_TOKEN_ENDPOINT = 'http://localhost:8080/auth/realms/click-and-eat/protocol/openid-connect/token'
-OIDC_OP_USER_ENDPOINT = 'http://localhost:8080/auth/realms/click-and-eat/protocol/openid-connect/userinfo'
-OIDC_OP_JWKS_ENDPOINT = 'http://localhost:8080/auth/realms/click-and-eat/protocol/openid-connect/certs'
+OIDC_RP_CLIENT_ID = 'click-eat'
+OIDC_RP_CLIENT_SECRET = 'P4UwgG88x4RYLr08j3a3ABv6EFiECZ2X'
+OIDC_OP_AUTHORIZATION_ENDPOINT = 'http://localhost:8080/auth/realms/saturne/protocol/openid-connect/auth'
+OIDC_OP_TOKEN_ENDPOINT = 'http://localhost:8080/auth/realms/saturne/protocol/openid-connect/token'
+OIDC_OP_USER_ENDPOINT = 'http://localhost:8080/auth/realms/saturne/protocol/openid-connect/userinfo'
+OIDC_OP_JWKS_ENDPOINT = 'http://localhost:8080/auth/realms/saturne/protocol/openid-connect/certs'
 
 # Authentication backend
 AUTHENTICATION_BACKENDS = (
