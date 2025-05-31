@@ -44,3 +44,20 @@ Afficher d’autres informations du token (email, rôle, etc.) ?
 Générer une page de profil utilisateur dédiée dans Cosmos X Docs ?
 
 Ou tester l’appel à l’API Laravel sécurisé avec le token JWT ?
+
+docker-compose up -d
+docker-compose stop
+
+
+
+biblio/backend/
+Application Laravel avec structure standard
+
+app/, routes/, public/, resources/
+
+Dockerfile
+
+.env.example
+
+🔹 docker-compose.yml (racine)
+Contient les services : keycloak, postgres, cosmos-frontend, cosmos-backend, etc.
