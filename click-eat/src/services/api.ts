@@ -1,13 +1,6 @@
 import axios from 'axios';
 import { useKeycloak } from '../contexts/KeycloakContext';
 
-// Extend the Window interface to include keycloakInstance
-declare global {
-  interface Window {
-    keycloakInstance?: any;
-  }
-}
-
 // Create a base axios instance
 const api = axios.create({
   baseURL: 'http://localhost:8000/api',
