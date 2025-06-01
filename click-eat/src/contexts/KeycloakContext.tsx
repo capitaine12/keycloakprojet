@@ -1,5 +1,6 @@
 // src/contexts/KeycloakContext.tsx
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import type { KeycloakProfile } from 'keycloak-js';
 import Keycloak from 'keycloak-js';
 
 type KeycloakContextType = {
@@ -25,7 +26,8 @@ export const useKeycloak = () => useContext(KeycloakContext);
 export const KeycloakProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [keycloak, setKeycloak] = useState<Keycloak | null>(null);
   const [initialized, setInitialized] = useState(false);
-  const [userProfile, setUserProfile] = useState(null);
+  const [userProfile, setUserProfile] = useState<KeycloakProfile | null>(null);
+
 
   useEffect(() => {
     const initKeycloak = async () => {
@@ -38,9 +40,9 @@ export const KeycloakProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       try {
         const authenticated = await keycloakInstance.init({
           onLoad: 'login-required',
-          pkceMethod: 'S256',
-          responseMode: 'query',
           checkLoginIframe: false,
+          pkceMethod: 'S256',
+          enableLogging: true,
           flow: 'standard',
         });
 

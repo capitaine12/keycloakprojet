@@ -2,4 +2,4 @@ Django==5.0.1
 djangorestframework==3.14.0
 django-cors-headers==4.3.1
 django-filter==23.5
-mozilla-django-oidc==3.1.0
+mozilla-django-oidc==4.0.1

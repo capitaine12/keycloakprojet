@@ -1,50 +1,31 @@
-"""
-Django settings for django_project project.
-"""
-
 from pathlib import Path
 import os
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# --- BASE CONFIGURATION ---
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-your-secret-key-goes-here'
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 ALLOWED_HOSTS = ['*']
 
-# Application definition
-
-""" INSTALLED_APPS = [
+# --- INSTALLED APPS ---
+INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Tiers
     'rest_framework',
     'corsheaders',
-    'food_delivery',
     'mozilla_django_oidc',
-] """
 
-INSTALLED_APPS = [
-    # ...
-    'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.openid_connect',
-    # ...
+    # App locale
+    'food_delivery',
 ]
 
-SITE_ID = 1
-
-
-
+# --- MIDDLEWARE ---
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -57,8 +38,10 @@ MIDDLEWARE = [
     'mozilla_django_oidc.middleware.SessionRefresh',
 ]
 
+# --- URL CONF ---
 ROOT_URLCONF = 'django_project.urls'
 
+# --- TEMPLATES ---
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -77,9 +60,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'django_project.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
+# --- DATABASE ---
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -87,9 +68,7 @@ DATABASES = {
     }
 }
 
-# Password validation
-# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
-
+# --- PASSWORD VALIDATION ---
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -105,31 +84,40 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Internationalization
-# https://docs.djangoproject.com/en/5.0/topics/i18n/
-
+# --- INTERNATIONALIZATION ---
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
-
+# --- STATIC FILES ---
 STATIC_URL = 'static/'
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# CORS settings
+# --- CORS HEADERS ---
 CORS_ALLOW_ALL_ORIGINS = True
 
-# REST Framework settings
+# --- AUTHENTICATION BACKENDS ---
+AUTHENTICATION_BACKENDS = (
+    'mozilla_django_oidc.auth.OIDCAuthenticationBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+# --- OIDC / Keycloak CONFIGURATION ---
+OIDC_RP_CLIENT_ID = 'click-eat-api'
+OIDC_RP_CLIENT_SECRET = 'XSQ1ZfwE4J4FLkCLGnniwIHtoPOpdkJq'
+
+OIDC_OP_AUTHORIZATION_ENDPOINT = 'http://localhost:8080/realms/saturne/protocol/openid-connect/auth'
+OIDC_OP_TOKEN_ENDPOINT = 'http://localhost:8080/realms/saturne/protocol/openid-connect/token'
+OIDC_OP_USER_ENDPOINT = 'http://localhost:8080/realms/saturne/protocol/openid-connect/userinfo'
+OIDC_OP_JWKS_ENDPOINT = 'http://localhost:8080/realms/saturne/protocol/openid-connect/certs'
+
+# --- LOGIN / LOGOUT REDIRECTS ---
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+# --- DRF CONFIG ---
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'mozilla_django_oidc.contrib.drf.OIDCAuthentication',
@@ -139,41 +127,3 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ),
 }
-
-# Keycloak settings
-""" OIDC_RP_CLIENT_ID = 'click-eat'
-OIDC_RP_CLIENT_SECRET = 'P4UwgG88x4RYLr08j3a3ABv6EFiECZ2X'
-OIDC_OP_AUTHORIZATION_ENDPOINT = 'http://localhost:8080/realms/saturne/protocol/openid-connect/auth'
-OIDC_OP_TOKEN_ENDPOINT = 'http://localhost:8080/auth/realms/saturne/protocol/openid-connect/token'
-OIDC_OP_USER_ENDPOINT = 'http://localhost:8080/auth/realms/saturne/protocol/openid-connect/userinfo'
-OIDC_OP_JWKS_ENDPOINT = 'http://localhost:8080/auth/realms/saturne/protocol/openid-connect/certs'
- """
-
-SOCIALACCOUNT_PROVIDERS = {
-    'openid_connect': {
-        'SERVERS': {
-            'keycloak': {
-                'CLAIMS_ENDPOINT': 'http://localhost:8080/realms/saturne/protocol/openid-connect/userinfo',
-                'TOKEN_ENDPOINT': 'http://localhost:8080/realms/saturne/protocol/openid-connect/token',
-                'AUTHORIZATION_ENDPOINT': 'http://localhost:8080/realms/saturne/protocol/openid-connect/auth',
-                'END_SESSION_ENDPOINT': 'http://localhost:8080/realms/saturne/protocol/openid-connect/logout',
-                'ISSUER': 'http://localhost:8080/realms/saturne',
-                'CLIENT_ID': 'click-eat-id',
-                'CLIENT_SECRET': 'P4UwgG88x4RYLr08j3a3ABv6EFiECZ2X',
-                'SCOPE': ['openid', 'profile', 'email'],
-            }
-        }
-    }
-}
-
-
-# Authentication backend
-""" AUTHENTICATION_BACKENDS = (
-    'mozilla_django_oidc.auth.OIDCAuthenticationBackend',
-    'django.contrib.auth.backends.ModelBackend',
-) """
-
-AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
-)
