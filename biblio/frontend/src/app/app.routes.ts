@@ -21,15 +21,15 @@ export const routes: Routes = [
     loadComponent: () =>
       import('../portail/portail.component').then(m => m.PortailComponent)
   },
-  /*
+   /*
   {
     path: 'click-eat',
     loadComponent: () =>
-      import('./click-eat/click-eat.component').then(m => m.ClickEatComponent),
+      import('/click-eat/src').then(m => m.ClickEatComponent),
     canActivate: [KeycloakAuthGuard],
     data: { roles: [] }
   },
-   {
+  {
     path: 'classe-note',
     loadComponent: () =>
       import('./classe-note/classe-note.component').then(m => m.ClasseNoteComponent),

@@ -1,3 +1,4 @@
+// src/contexts/KeycloakContext.tsx
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import Keycloak from 'keycloak-js';
 
@@ -23,22 +24,24 @@ export const useKeycloak = () => useContext(KeycloakContext);
 
 export const KeycloakProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [keycloak, setKeycloak] = useState<Keycloak | null>(null);
-  const [initialized, setInitialized] = useState<boolean>(false);
-  const [userProfile, setUserProfile] = useState<any>(null);
+  const [initialized, setInitialized] = useState(false);
+  const [userProfile, setUserProfile] = useState(null);
 
   useEffect(() => {
     const initKeycloak = async () => {
-      try {
-        // In a real app, these values would come from environment variables
-        const keycloakInstance = new Keycloak({
-          url: 'http://localhost:8080/auth',
-          realm: 'saturne',
-          clientId: 'click-eat',
-        });
+      const keycloakInstance = new Keycloak({
+        url: 'http://localhost:8080',
+        realm: 'saturne',
+        clientId: 'click-eat',
+      });
 
+      try {
         const authenticated = await keycloakInstance.init({
-          onLoad: 'check-sso',
-          silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html',
+          onLoad: 'login-required',
+          pkceMethod: 'S256',
+          responseMode: 'query',
+          checkLoginIframe: false,
+          flow: 'standard',
         });
 
         setKeycloak(keycloakInstance);
@@ -49,14 +52,14 @@ export const KeycloakProvider: React.FC<{ children: React.ReactNode }> = ({ chil
           setUserProfile(profile);
         }
 
-        // Set up token refresh
+        // Rafraîchissement automatique du token
         setInterval(() => {
-          keycloakInstance.updateToken(70).catch(() => {
-            console.error('Failed to refresh token');
-          });
+          keycloakInstance
+            .updateToken(70)
+            .catch(() => console.error('Échec de la mise à jour du token'));
         }, 60000);
       } catch (error) {
-        console.error('Failed to initialize Keycloak', error);
+        console.error('❌ Échec de l\'initialisation Keycloak', error);
         setInitialized(true);
       }
     };
@@ -65,15 +68,11 @@ export const KeycloakProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   }, []);
 
   const login = () => {
-    if (keycloak) {
-      keycloak.login();
-    }
+    if (keycloak) keycloak.login();
   };
 
   const logout = () => {
-    if (keycloak) {
-      keycloak.logout();
-    }
+    if (keycloak) keycloak.logout({ redirectUri: window.location.origin });
   };
 
   return (
@@ -87,7 +86,7 @@ export const KeycloakProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         userProfile,
       }}
     >
-      {children}
+      {initialized ? children : <div>Initialisation en cours...</div>}
     </KeycloakContext.Provider>
   );
 };

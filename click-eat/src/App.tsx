@@ -13,6 +13,8 @@ import ProfilePage from './pages/ProfilePage';
 import LoginPage from './pages/LoginPage';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 
+
+
 function App() {
   return (
     <KeycloakProvider>

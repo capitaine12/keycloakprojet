@@ -143,7 +143,7 @@ REST_FRAMEWORK = {
 # Keycloak settings
 """ OIDC_RP_CLIENT_ID = 'click-eat'
 OIDC_RP_CLIENT_SECRET = 'P4UwgG88x4RYLr08j3a3ABv6EFiECZ2X'
-OIDC_OP_AUTHORIZATION_ENDPOINT = 'http://localhost:8080/auth/realms/saturne/protocol/openid-connect/auth'
+OIDC_OP_AUTHORIZATION_ENDPOINT = 'http://localhost:8080/realms/saturne/protocol/openid-connect/auth'
 OIDC_OP_TOKEN_ENDPOINT = 'http://localhost:8080/auth/realms/saturne/protocol/openid-connect/token'
 OIDC_OP_USER_ENDPOINT = 'http://localhost:8080/auth/realms/saturne/protocol/openid-connect/userinfo'
 OIDC_OP_JWKS_ENDPOINT = 'http://localhost:8080/auth/realms/saturne/protocol/openid-connect/certs'
@@ -153,11 +153,11 @@ SOCIALACCOUNT_PROVIDERS = {
     'openid_connect': {
         'SERVERS': {
             'keycloak': {
-                'CLAIMS_ENDPOINT': 'http://localhost:8080/auth/realms/saturne/protocol/openid-connect/userinfo',
-                'TOKEN_ENDPOINT': 'http://localhost:8080/auth/realms/saturne/protocol/openid-connect/token',
-                'AUTHORIZATION_ENDPOINT': 'http://localhost:8080/auth/realms/saturne/protocol/openid-connect/auth',
-                'END_SESSION_ENDPOINT': 'http://localhost:8080/auth/realms/saturne/protocol/openid-connect/logout',
-                'ISSUER': 'http://localhost:8080/auth/realms/saturne',
+                'CLAIMS_ENDPOINT': 'http://localhost:8080/realms/saturne/protocol/openid-connect/userinfo',
+                'TOKEN_ENDPOINT': 'http://localhost:8080/realms/saturne/protocol/openid-connect/token',
+                'AUTHORIZATION_ENDPOINT': 'http://localhost:8080/realms/saturne/protocol/openid-connect/auth',
+                'END_SESSION_ENDPOINT': 'http://localhost:8080/realms/saturne/protocol/openid-connect/logout',
+                'ISSUER': 'http://localhost:8080/realms/saturne',
                 'CLIENT_ID': 'click-eat-id',
                 'CLIENT_SECRET': 'P4UwgG88x4RYLr08j3a3ABv6EFiECZ2X',
                 'SCOPE': ['openid', 'profile', 'email'],
